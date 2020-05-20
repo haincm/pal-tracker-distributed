@@ -13,7 +13,7 @@ import javax.annotation.PreDestroy;
 import java.util.TimeZone;
 @EnableWebSecurity
 @EnableResourceServer
-//@EnableOAuth2Client
+@EnableOAuth2Client
 @EnableEurekaClient
 @SpringBootApplication
 @ComponentScan({
