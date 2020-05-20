@@ -1,5 +1,6 @@
 package io.pivotal.pal.tracker.registration;
 
+import com.netflix.hystrix.Hystrix;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+import javax.annotation.PreDestroy;
 import java.util.TimeZone;
 @EnableWebSecurity
 @EnableResourceServer
@@ -26,4 +28,10 @@ public class App {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         SpringApplication.run(App.class, args);
     }
+
+    @PreDestroy
+    public void cleanUp() {
+        Hystrix.reset();
+    }
+
 }
